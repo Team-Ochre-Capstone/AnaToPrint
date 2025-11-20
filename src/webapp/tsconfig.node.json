@@ -1,0 +1,11 @@
+//config for vite.config.ts
+
+
+{
+  "compilerOptions": {
+    "composite": true,               // This is a sub-project
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["vite.config.ts"]      // Only applies to vite.config.ts
+}
