@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/Team-Ochre-Capstone/Ochre-Capstone/issues"
   },
-  "homepage": "https://github.com/Team-Ochre-Capstone/Ochre-Capstone#readme"
+  "homepage": "https://github.com/Team-Ochre-Capstone/Ochre-Capstone#readme",
+  "devDependencies": {
+    "@types/selenium-webdriver": "^4.35.4",
+    "chromedriver": "^142.0.3",
+    "geckodriver": "^6.0.2",
+    "selenium-webdriver": "^4.38.0"
+  }
 }
