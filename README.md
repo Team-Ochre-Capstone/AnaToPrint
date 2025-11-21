@@ -7,7 +7,7 @@ Capstone project for BS in Computer Science, University of Maine
 1. Clone the repository
 ```bash
    git clone 
-   cd capstone-project
+   cd Ochre-Capstone
 ```
 
 2. Install dependencies
@@ -47,11 +47,11 @@ Capstone project for BS in Computer Science, University of Maine
 
 ## Team
 
-Israk Arafat
-Gregory Michaud
-Cooper Stepenkiw
-Bryan Sturdivant
-Ethan Wyman
+- Israk Arafat
+- Gregory Michaud
+- Cooper Stepenkiw
+- Bryan Sturdivant
+- Ethan Wyman
 
 ## License
 
