@@ -1,16 +1,23 @@
-//Our main component - Where (I believe) pretty much all of our work will be happening for the app
-
-
-import React from 'react'//This might be able to be removed - I think newer versions of react dont need react to be imported - Keeping it just incase, but it  is underlined as an error
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import UploadPage from "./pages/UploadPage";
+import PreviewPage from "./pages/PreviewPage";
+import ExportPage from "./pages/ExportPage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Medical CT-Scan 3D Printing</h1>
-      <p>Capstone Project - University of Maine</p>
-      <p>Setup complete! Ready to start developing.</p>
-    </div>
-  )
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<UploadPage />} />
+          <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/export" element={<ExportPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
 }
 
-export default App
+export default App;
