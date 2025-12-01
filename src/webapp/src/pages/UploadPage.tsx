@@ -31,17 +31,67 @@ const UploadPage = () => {
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => {
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsDragging(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsDragging(false);
-    handleFileSelect(e.dataTransfer.files);
+
+    const items = e.dataTransfer.items;
+    if (!items || items.length === 0) return;
+
+    const files: File[] = [];
+
+    // Process all dropped items
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item.kind === "file") {
+        const entry = item.webkitGetAsEntry();
+        if (entry) {
+          await traverseFileTree(entry, files);
+        }
+      }
+    }
+
+    if (files.length > 0) {
+      const fileList = createFileList(files);
+      handleFileSelect(fileList);
+    }
+  };
+
+  // Helper to traverse folder structure
+  const traverseFileTree = async (entry: any, files: File[]): Promise<void> => {
+    if (entry.isFile) {
+      const file = await new Promise<File>((resolve) => {
+        entry.file((f: File) => resolve(f));
+      });
+      files.push(file);
+    } else if (entry.isDirectory) {
+      const dirReader = entry.createReader();
+      const entries = await new Promise<any[]>((resolve) => {
+        dirReader.readEntries((results: any[]) => resolve(results));
+      });
+
+      for (const childEntry of entries) {
+        await traverseFileTree(childEntry, files);
+      }
+    }
+  };
+
+  // Helper to create FileList from File array
+  const createFileList = (files: File[]): FileList => {
+    const dataTransfer = new DataTransfer();
+    files.forEach((file) => dataTransfer.items.add(file));
+    return dataTransfer.files;
   };
 
   const handleBrowseClick = () => {
@@ -175,12 +225,12 @@ const UploadPage = () => {
         />
 
         <div className="mt-6 flex gap-3">
-          {!isLoading && (
+          {isComplete && (
             <button
               onClick={handleBrowseClick}
               className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isComplete ? "Select Different Folder" : "Browse Folder"}
+              Select Different Folder
             </button>
           )}
 
