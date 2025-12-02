@@ -1,30 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAppSettings } from "../hooks/useAppSettings";
-import { clearSession } from "../utils/storage";
 
 const SettingsPage = () => {
-  const navigate = useNavigate();
   const { settings, updateSettings } = useAppSettings();
-  const [saveRecent, setSaveRecent] = useState(true);
 
   const handleSaveSettings = () => {
     // We will save them in local storage or cookie
     alert("Settings saved successfully!");
-  };
-
-  const handleClearHistory = () => {
-    if (
-      confirm("Are you sure you want to clear all history and session data?")
-    ) {
-      clearSession();
-      setSaveRecent(false);
-      alert("History cleared successfully!");
-    }
-  };
-
-  const handleBackHome = () => {
-    navigate("/");
   };
 
   return (
@@ -84,8 +65,8 @@ const SettingsPage = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               >
                 <option value="high">High (recommended)</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
+                {/* <option value="medium">Medium</option>
+                <option value="low">Low</option> */}
               </select>
             </div>
 
@@ -104,18 +85,20 @@ const SettingsPage = () => {
                 }
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               >
+                <option value="white">White (default)</option>
                 <option value="light-gray">Light Gray (default)</option>
-                <option value="white">White</option>
                 <option value="black">Black</option>
               </select>
             </div>
 
             <label className="flex items-center gap-3 cursor-pointer">
               <input
+                // make it unchangeable
                 type="checkbox"
                 checked={settings.showGrid}
                 onChange={(e) => updateSettings({ showGrid: e.target.checked })}
                 className="w-4 h-4 text-blue-500 rounded"
+                disabled
               />
               <span className="text-gray-700">Show Grid</span>
             </label>
@@ -151,6 +134,7 @@ const SettingsPage = () => {
                 onChange={(e) =>
                   updateSettings({ autoOptimize: e.target.checked })
                 }
+                disabled
                 className="mt-1 w-4 h-4 text-blue-500 rounded"
               />
               <div>
@@ -160,61 +144,7 @@ const SettingsPage = () => {
                 </div>
               </div>
             </label>
-
-            <div>
-              <label
-                htmlFor="default-export"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Default Export Format
-              </label>
-              <select
-                id="default-export"
-                value={settings.defaultExport}
-                onChange={(e) =>
-                  updateSettings({ defaultExport: e.target.value as any })
-                }
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="stl">STL</option>
-                <option value="gcode">G-code</option>
-              </select>
-            </div>
           </div>
-        </div>
-
-        {/* Browser Compatibility */}
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-3 text-gray-800">
-            Browser Compatibility
-          </h3>
-          <p className="text-gray-700">Chrome (recommended), Firefox, Safari</p>
-        </div>
-
-        {/* Privacy & Data */}
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-3 text-gray-800">
-            Privacy & Data
-          </h3>
-
-          <label className="flex items-center gap-3 cursor-pointer mb-4">
-            <input
-              type="checkbox"
-              checked={saveRecent}
-              onChange={(e) => setSaveRecent(e.target.checked)}
-              className="w-4 h-4 text-blue-500 rounded"
-            />
-            <span className="text-gray-700">
-              Save recent files (session storage)
-            </span>
-          </label>
-
-          <button
-            onClick={handleClearHistory}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
-          >
-            Clear History
-          </button>
         </div>
 
         {/* About */}
@@ -231,14 +161,8 @@ const SettingsPage = () => {
         {/* Action Buttons */}
         <div className="flex gap-3">
           <button
-            onClick={handleBackHome}
-            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-          >
-            Back to Home
-          </button>
-          <button
             onClick={handleSaveSettings}
-            className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+            className="px-6 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-700 transition-colors"
           >
             Save Settings
           </button>
