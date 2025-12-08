@@ -31,7 +31,7 @@ Capstone project for BS in Computer Science, University of Maine
 - **Build Tool**: Vite
 - **3D Visualization**: VTK.js
 - **DICOM Processing**: VTK.js
-- **Testing**: Selenium (to be added)
+- **Testing**: Playwright (to be added)
 
 ## Project Structure
 
