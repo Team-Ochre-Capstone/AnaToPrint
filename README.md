@@ -30,7 +30,7 @@ Capstone project for BS in Computer Science, University of Maine
 - **Frontend**: React + TypeScript
 - **Build Tool**: Vite
 - **3D Visualization**: VTK.js
-- **DICOM Processing**: VTK.js
+- **DICOM Processing**: ITK.WASM
 - **Testing**: Playwright (to be added)
 
 ## Project Structure

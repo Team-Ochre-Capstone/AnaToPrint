@@ -1,11 +1,19 @@
-import { createContext, useContext, useRef, useState, ReactNode, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
 import type { DicomFileInfo } from "../utils/dicomUtils";
+import type { vtkImageData } from "@kitware/vtk.js/Common/DataModel/ImageData";
 
 interface DicomContextType {
-  getVtkImage: () => any | null;
+  getVtkImage: () => vtkImageData | null;
   fileInfo: DicomFileInfo[];
   hasData: boolean;
-  setDicomData: (vtkImage: any, fileInfo: DicomFileInfo[]) => void;
+  setDicomData: (vtkImage: vtkImageData, fileInfo: DicomFileInfo[]) => void;
   clearDicomData: () => void;
 }
 
@@ -13,17 +21,20 @@ const DicomContext = createContext<DicomContextType | undefined>(undefined);
 
 export function DicomProvider({ children }: { children: ReactNode }) {
   // Use ref for VTK image to avoid serialization issues
-  const vtkImageRef = useRef<any | null>(null);
+  const vtkImageRef = useRef<vtkImageData | null>(null);
   const [fileInfo, setFileInfo] = useState<DicomFileInfo[]>([]);
   const [hasData, setHasData] = useState(false);
 
   const getVtkImage = useCallback(() => vtkImageRef.current, []);
 
-  const setDicomData = useCallback((newVtkImage: any, newFileInfo: DicomFileInfo[]) => {
-    vtkImageRef.current = newVtkImage;
-    setFileInfo(newFileInfo);
-    setHasData(true);
-  }, []);
+  const setDicomData = useCallback(
+    (newVtkImage: vtkImageData, newFileInfo: DicomFileInfo[]) => {
+      vtkImageRef.current = newVtkImage;
+      setFileInfo(newFileInfo);
+      setHasData(true);
+    },
+    []
+  );
 
   const clearDicomData = useCallback(() => {
     vtkImageRef.current = null;
@@ -33,19 +44,18 @@ export function DicomProvider({ children }: { children: ReactNode }) {
 
   return (
     <DicomContext.Provider
-      value={{ 
-        getVtkImage, 
+      value={{
+        getVtkImage,
         fileInfo,
         hasData,
-        setDicomData, 
-        clearDicomData 
+        setDicomData,
+        clearDicomData,
       }}
     >
       {children}
     </DicomContext.Provider>
   );
 }
-
 
 export function useDicomContext() {
   const context = useContext(DicomContext);

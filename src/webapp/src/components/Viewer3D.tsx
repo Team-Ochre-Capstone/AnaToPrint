@@ -1,13 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import "@kitware/vtk.js/Rendering/OpenGL/Profiles/Volume";
-import vtkFullScreenRenderWindow from "@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow";
-import vtkVolume from "@kitware/vtk.js/Rendering/Core/Volume";
+import vtkFullScreenRenderWindow, {
+  vtkFullScreenRenderWindow as vtkFullScreenRenderWindowType,
+} from "@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow";
+import vtkVolume, {
+  vtkVolume as vtkVolumeType,
+} from "@kitware/vtk.js/Rendering/Core/Volume";
 import vtkVolumeMapper from "@kitware/vtk.js/Rendering/Core/VolumeMapper";
-import vtkColorTransferFunction from "@kitware/vtk.js/Rendering/Core/ColorTransferFunction";
-import vtkPiecewiseFunction from "@kitware/vtk.js/Common/DataModel/PiecewiseFunction";
+import vtkColorTransferFunction, {
+  vtkColorTransferFunction as vtkColorTransferFunctionType,
+} from "@kitware/vtk.js/Rendering/Core/ColorTransferFunction";
+import vtkPiecewiseFunction, {
+  vtkPiecewiseFunction as vtkPiecewiseFunctionType,
+} from "@kitware/vtk.js/Common/DataModel/PiecewiseFunction";
+import type { vtkImageData } from "@kitware/vtk.js/Common/DataModel/ImageData";
+import type { vtkRenderer } from "@kitware/vtk.js/Rendering/Core/Renderer";
+import type { vtkRenderWindow } from "@kitware/vtk.js/Rendering/Core/RenderWindow";
 
 interface Viewer3DProps {
-  vtkImage: any;
+  vtkImage: vtkImageData;
   className?: string;
   window?: number;
   level?: number;
@@ -22,12 +33,14 @@ export default function Viewer3D({
   onReady,
 }: Viewer3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const fullScreenRendererRef = useRef<any>(null);
-  const rendererRef = useRef<any>(null);
-  const renderWindowRef = useRef<any>(null);
-  const volumeActorRef = useRef<any>(null);
-  const ctfunRef = useRef<any>(null);
-  const ofunRef = useRef<any>(null);
+  const fullScreenRendererRef = useRef<vtkFullScreenRenderWindowType | null>(
+    null
+  );
+  const rendererRef = useRef<vtkRenderer | null>(null);
+  const renderWindowRef = useRef<vtkRenderWindow | null>(null);
+  const volumeActorRef = useRef<vtkVolumeType | null>(null);
+  const ctfunRef = useRef<vtkColorTransferFunctionType | null>(null);
+  const ofunRef = useRef<vtkPiecewiseFunctionType | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
