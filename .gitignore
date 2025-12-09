@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 src/webapp/public/pipelines/
 
@@ -36,6 +35,11 @@ Thumbs.db
 coverage/
 .nyc_output/
 *.lcov
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
 
 # Logs
 logs/
