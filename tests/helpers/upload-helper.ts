@@ -7,7 +7,7 @@ import fs from "fs";
  * @param page - Playwright page object
  */
 export async function uploadDicomFiles(page: Page): Promise<void> {
-  const dicomFolder = path.join(__dirname, "../fixtures/dicom/Test_CT_Dicom");
+  const dicomFolder = path.join(__dirname, "../fixtures/Test_CT_Dicom");
 
   const fileChooserPromise = page.waitForEvent("filechooser");
 
