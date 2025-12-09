@@ -6,7 +6,7 @@
     "src/webapp"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test --workspace=src/webapp",
     "install-all": "npm install",
     "dev": "npm run dev --workspace=src/webapp",
     "build": "npm run build --workspace=src/webapp",
