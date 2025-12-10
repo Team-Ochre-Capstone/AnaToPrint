@@ -14,6 +14,7 @@ const UploadPage = () => {
   } = useDicomContext();
   const {
     uploadDicomFiles,
+    loadSeries,
     clearUpload,
     isLoading,
     isComplete,
@@ -22,6 +23,7 @@ const UploadPage = () => {
     statusMessage,
     vtkImage,
     fileInfo,
+    seriesList,
   } = useDicomUpload();
 
   const [isDragging, setIsDragging] = useState(false);
@@ -173,7 +175,7 @@ const UploadPage = () => {
           onDrop={handleDrop}
           onClick={handleBrowseClick}
         >
-          {!isLoading && !displayIsComplete && (
+          {!isLoading && !displayIsComplete && seriesList.length === 0 && (
             <div className="cursor-pointer">
               <svg
                 className="mx-auto h-16 w-16 text-gray-400 mb-4"
@@ -192,6 +194,40 @@ const UploadPage = () => {
                 Drop DICOM folder here
               </p>
               <p className="text-sm text-gray-500">or click to browse</p>
+            </div>
+          )}
+
+          {!isLoading && !displayIsComplete && seriesList.length > 0 && (
+            <div
+              className="text-left w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-lg font-semibold mb-4 text-gray-800 text-center">
+                Select a Series
+              </h3>
+              <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+                {seriesList.map((series) => (
+                  <div
+                    key={series.seriesInstanceID}
+                    onClick={() => loadSeries(series.files)}
+                    className="p-4 border rounded-lg hover:bg-blue-50 cursor-pointer transition-colors border-gray-200 hover:border-blue-300 bg-white shadow-sm"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          {series.seriesDescription}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          Patient ID: {series.patientID}
+                        </p>
+                      </div>
+                      <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                        {series.numberOfSlices} slices
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
