@@ -44,7 +44,8 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        browserName: "chromium" 
+        browserName: "chromium", 
+        headless: false,
       },
     },
 

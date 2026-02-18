@@ -38,6 +38,7 @@ test.describe("Upload Page", () => {
     await continueButton.click();
 
     await expect(page).toHaveURL("/preview", { timeout: 10000 });
+    await expect(page.locator("h2")).not.toContainText("Upload DICOM Files", { timeout: 5000});
     await expect(page.locator("h2")).toContainText("3D Preview", {
       timeout: 10000,
     });
