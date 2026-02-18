@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-src/webapp/public/pipelines/
+webapp/public/pipelines/
 
 # Build outputs
 dist/

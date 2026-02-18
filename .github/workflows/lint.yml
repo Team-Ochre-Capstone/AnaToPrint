@@ -25,4 +25,4 @@ jobs:
 
       - name: TypeScript type check
         run: npm run build
-        working-directory: ./src/webapp
+        working-directory: ./webapp
