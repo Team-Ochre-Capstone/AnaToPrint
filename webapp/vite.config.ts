@@ -7,14 +7,14 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: "./vitest.setup.ts",
+    setupFiles: "./src/vitest.setup.ts",
     css: true,
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
       exclude: [
         "node_modules/",
-        "vitest.setup.ts",
+        "src/vitest.setup.ts",
         "**/*.d.ts",
         "**/*.config.*",
         "**/mockData",
@@ -37,11 +37,11 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: "../../node_modules/@itk-wasm/image-io/dist/pipelines/*.{js,wasm,wasm.zst}",
+          src: "../node_modules/@itk-wasm/image-io/dist/pipelines/*.{js,wasm,wasm.zst}",
           dest: "pipelines/",
         },
         {
-          src: "../../node_modules/@itk-wasm/dicom/dist/pipelines/*.{js,wasm,wasm.zst}",
+          src: "../node_modules/@itk-wasm/dicom/dist/pipelines/*.{js,wasm,wasm.zst}",
           dest: "pipelines/",
         },
       ],
