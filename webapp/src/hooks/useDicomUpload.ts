@@ -64,7 +64,7 @@ export function useDicomUpload() {
 
         const itkImage = await loadDicomImageSeries(
           files.map((f) => f.file),
-          progressCallback
+          progressCallback,
         );
 
         // Convert to VTK image
@@ -96,7 +96,7 @@ export function useDicomUpload() {
         }));
       }
     },
-    [progressCallback]
+    [progressCallback],
   );
 
   const uploadDicomFiles = useCallback(
@@ -184,7 +184,7 @@ export function useDicomUpload() {
         });
       }
     },
-    [progressCallback, loadSeries]
+    [progressCallback, loadSeries],
   );
 
   const clearUpload = useCallback(() => {

@@ -13,7 +13,7 @@ export interface STLExportOptions {
   /** Optional: Progress callback */
   onProgress?: (
     stage: "marching-cubes" | "smoothing" | "writing" | "complete",
-    metrics: ExportMetrics
+    metrics: ExportMetrics,
   ) => void;
 }
 
@@ -33,7 +33,7 @@ export interface ExportMetrics {
  */
 export function generateSTL(
   imageData: vtkImageData,
-  options: STLExportOptions
+  options: STLExportOptions,
 ): Uint8Array {
   const { isoValue, binary = true, smoothing = true, onProgress } = options;
   const metrics: ExportMetrics = {};
@@ -112,7 +112,7 @@ export function generateSTL(
  */
 export function downloadSTL(
   stlData: Uint8Array | string,
-  filename: string
+  filename: string,
 ): void {
   const blob = new Blob([stlData as BlobPart], {
     type: "application/octet-stream",
@@ -154,8 +154,8 @@ export async function exportToSTL(
   smoothing: boolean = false,
   onProgress?: (
     stage: "marching-cubes" | "smoothing" | "writing" | "complete",
-    metrics: ExportMetrics
-  ) => void
+    metrics: ExportMetrics,
+  ) => void,
 ): Promise<void> {
   const isoValue =
     typeof tissueType === "number" ? tissueType : HU_THRESHOLDS[tissueType];

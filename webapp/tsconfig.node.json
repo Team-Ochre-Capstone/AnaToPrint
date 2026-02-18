@@ -1,6 +1,4 @@
 //config for vite.config.ts
-
-
 {
   "compilerOptions": {
     "composite": true,               // This is a sub-project

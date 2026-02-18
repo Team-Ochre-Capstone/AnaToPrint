@@ -63,7 +63,7 @@ const ExportPage = () => {
           (stage, metrics) => {
             setExportStage(stage);
             setExportMetrics((prev) => ({ ...prev, ...metrics }));
-          }
+          },
         );
       } else {
         setIsExporting(false);
@@ -235,7 +235,7 @@ const ExportPage = () => {
                   value={customThreshold}
                   onChange={(e) =>
                     setCustomThreshold(
-                      Math.max(-1000, Math.min(3000, Number(e.target.value)))
+                      Math.max(-1000, Math.min(3000, Number(e.target.value))),
                     )
                   }
                   disabled={threshold !== "custom"}

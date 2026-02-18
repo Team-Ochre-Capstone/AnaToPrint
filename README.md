@@ -33,12 +33,12 @@ Capstone project for BS in Computer Science, University of Maine
 - **Build Tool**: Vite
 - **3D Visualization**: VTK.js
 - **DICOM Processing**: ITK.WASM
-- **Testing**:  End-to-End Testing - Playwright + Unit & Component Testing - Vitest
+- **Testing**: End-to-End Testing - Playwright + Unit & Component Testing - Vitest
 
 ## Project Structure
 
 - `docs/` - Project documentation (proposal, SRS)
-- `src/webapp/` - React frontend application
+- `webapp/` - React frontend application
 - `tests/` - End-to-end tests
 
 ## Features

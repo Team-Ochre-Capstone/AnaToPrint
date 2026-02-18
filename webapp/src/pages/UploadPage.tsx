@@ -46,7 +46,7 @@ const UploadPage = () => {
       if (!files || files.length === 0) return;
       uploadDicomFiles(files);
     },
-    [uploadDicomFiles]
+    [uploadDicomFiles],
   );
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -106,7 +106,7 @@ const UploadPage = () => {
           entries = await new Promise<any[]>((resolve, reject) => {
             dirReader.readEntries(
               (results: any[]) => resolve(results),
-              (error: any) => reject(error)
+              (error: any) => reject(error),
             );
           });
           allEntries.push(...entries);

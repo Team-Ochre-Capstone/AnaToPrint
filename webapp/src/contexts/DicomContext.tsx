@@ -33,7 +33,7 @@ export function DicomProvider({ children }: { children: ReactNode }) {
       setFileInfo(newFileInfo);
       setHasData(true);
     },
-    []
+    [],
   );
 
   const clearDicomData = useCallback(() => {

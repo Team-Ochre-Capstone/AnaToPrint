@@ -17,13 +17,13 @@ declare module "@kitware/vtk.js/Filters/General/ImageMarchingCubes" {
   }
 
   export function newInstance(
-    initialValues?: vtkImageMarchingCubesInitialValues
+    initialValues?: vtkImageMarchingCubesInitialValues,
   ): vtkImageMarchingCubes;
 
   export function extend(
     publicAPI: object,
     model: object,
-    initialValues?: vtkImageMarchingCubesInitialValues
+    initialValues?: vtkImageMarchingCubesInitialValues,
   ): void;
 
   const vtkImageMarchingCubes: {
@@ -49,13 +49,13 @@ declare module "@kitware/vtk.js/IO/Geometry/STLWriter" {
   }
 
   export function newInstance(
-    initialValues?: vtkSTLWriterInitialValues
+    initialValues?: vtkSTLWriterInitialValues,
   ): vtkSTLWriter;
 
   export function extend(
     publicAPI: object,
     model: object,
-    initialValues?: vtkSTLWriterInitialValues
+    initialValues?: vtkSTLWriterInitialValues,
   ): void;
 
   const vtkSTLWriter: {
@@ -94,13 +94,13 @@ declare module "@kitware/vtk.js/Filters/General/WindowedSincPolyDataFilter" {
   }
 
   export function newInstance(
-    initialValues?: vtkWindowedSincPolyDataFilterInitialValues
+    initialValues?: vtkWindowedSincPolyDataFilterInitialValues,
   ): vtkWindowedSincPolyDataFilter;
 
   export function extend(
     publicAPI: object,
     model: object,
-    initialValues?: vtkWindowedSincPolyDataFilterInitialValues
+    initialValues?: vtkWindowedSincPolyDataFilterInitialValues,
   ): void;
 
   const vtkWindowedSincPolyDataFilter: {
@@ -158,7 +158,7 @@ declare module "@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow" {
   }
 
   export function newInstance(
-    initialValues?: vtkFullScreenRenderWindowInitialValues
+    initialValues?: vtkFullScreenRenderWindowInitialValues,
   ): vtkFullScreenRenderWindow;
 
   const vtkFullScreenRenderWindow: {

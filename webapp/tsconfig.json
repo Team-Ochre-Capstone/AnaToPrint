@@ -1,8 +1,4 @@
-
 // This tells typescript how to compile the react app code
-
-
-
 {
   "compilerOptions": {
     "target": "ES2020",             //compiling to modern java
@@ -22,6 +18,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vitest/globals"]
   },
-  "include": ["."],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
