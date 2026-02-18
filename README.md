@@ -27,6 +27,25 @@ Capstone project for BS in Computer Science, University of Maine
 
 4. Open browser to http://localhost:5173
 
+## Running Tests
+
+### Unit & Component Tests (Vitest)
+
+```bash
+cd webapp
+npx vitest run
+```
+
+### E2E Tests (Playwright)
+
+```bash
+# Install browsers (first time only)
+npx playwright install --with-deps
+
+# Run on all browsers
+npm run test:e2e
+```
+
 ## Tech Stack
 
 - **Frontend**: React + TypeScript
