@@ -46,6 +46,13 @@ export default function Viewer3D({
   useEffect(() => {
     if (!containerRef.current || !vtkImage) return;
 
+    // Skip VTK initialization in Playwright tests (no WebGL in headless)
+    if ((globalThis as any).__PLAYWRIGHT_TEST__){
+      setIsReady(true);
+      onReady?.();
+      return;
+    }
+
     // Create full screen render window
     const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
       container: containerRef.current,

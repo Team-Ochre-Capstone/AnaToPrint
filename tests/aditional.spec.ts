@@ -4,6 +4,13 @@ import path from "path";
 test.describe("DICOM Upload Navigation", () => {
   test.setTimeout(60000);
 
+  test.beforeEach(async ({ page }) => {
+    // Must be set before goto so the flag is available on first load
+    await page.addInitScript(() => {
+      (window as any).__PLAYWRIGHT_TEST__ = true;
+    });
+  });
+
   test("should navigate to 3D Preview after upload", async ({ page }) => {
     await page.goto("/");
 

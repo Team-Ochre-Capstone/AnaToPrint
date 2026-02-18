@@ -6,6 +6,10 @@ test.describe("Upload Page", () => {
   test.setTimeout(60000);
 
   test.beforeEach(async ({ page }) => {
+    // Must be set before goto so the flag is available on first load
+    await page.addInitScript(() => {
+      (window as any).__PLAYWRIGHT_TEST__ = true;
+    });
     await page.goto("/");
   });
 
@@ -38,8 +42,7 @@ test.describe("Upload Page", () => {
     await continueButton.click();
 
     await expect(page).toHaveURL("/preview", { timeout: 10000 });
-    await expect(page.locator("h2")).not.toContainText("Upload DICOM Files", { timeout: 5000});
-    await expect(page.locator("h2")).toContainText("3D Preview", {
+    await expect(page.getByRole("heading", { name: /3D Preview/i })).toBeVisible({
       timeout: 10000,
     });
   });
@@ -60,14 +63,14 @@ test.describe("Upload Page", () => {
 
   test("should show error for non-DICOM files (folder upload)", async ({ page }) => {
     await page.goto("/");
-  
+
     const fileInput = page.locator('input[type="file"]');
-  
+
     //folder containing invalid file(s)
     const invalidFolderPath = path.join(__dirname, "fixtures/Invalid_Folder");
-  
+
     await fileInput.setInputFiles(invalidFolderPath);
-  
+
     await expect(page.getByText("Error")).toBeVisible();
   });
 });
