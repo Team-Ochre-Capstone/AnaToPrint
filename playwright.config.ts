@@ -17,30 +17,52 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 60000,
+  
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:5173",
+
+    headless: process.env.CI ? true : true,
+
+    viewport: {width: 1280, height: 800},
+
+    actionTimeout: 20000,
+
+    navigationTimeout: 30000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     /* Screenshot on failure for easier debugging */
     screenshot: "only-on-failure",
+
+    video: process.env.CI ? "retain-on-failure" : "off",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        browserName: "chromium", 
+        headless: true,
+      },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: {
+        ...devices["Desktop Firefox"],
+        browserName: "firefox",
+      },
     },
 
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      use: {
+        ...devices["Desktop Safari"],
+        browserName: "webkit"
+      },
     },
   ],
 
@@ -50,5 +72,6 @@ export default defineConfig({
     url: "http://localhost:5173",
     reuseExistingServer: !process.env.CI,
     cwd: "./src/webapp",
+    timeout: 120000,
   },
 });
