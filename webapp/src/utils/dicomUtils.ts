@@ -34,7 +34,7 @@ export type ProgressCallback = (event: ProgressEvent) => void;
  */
 export async function parseDicomFiles(
   fileList: FileList | File[],
-  progressCallback?: ProgressCallback
+  progressCallback?: ProgressCallback,
 ): Promise<DicomFileInfo[]> {
   const files = Array.from(fileList);
   let loaded = 0;
@@ -139,7 +139,7 @@ export async function parseDicomFiles(
  */
 export async function loadDicomImageSeries(
   files: File[],
-  progressCallback?: ProgressCallback
+  progressCallback?: ProgressCallback,
 ) {
   if (progressCallback) {
     progressCallback({
@@ -187,7 +187,7 @@ export function groupDicomFiles(fileInfoList: DicomFileInfo[]) {
     if (!groupedMap.has(patientID)) {
       groupedMap.set(
         patientID,
-        new Map([[studyID, new Map([[seriesID, [fileInfo]]])]])
+        new Map([[studyID, new Map([[seriesID, [fileInfo]]])]]),
       );
     } else {
       const studies = groupedMap.get(patientID)!;

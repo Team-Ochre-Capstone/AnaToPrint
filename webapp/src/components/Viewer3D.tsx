@@ -34,7 +34,7 @@ export default function Viewer3D({
 }: Viewer3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const fullScreenRendererRef = useRef<vtkFullScreenRenderWindowType | null>(
-    null
+    null,
   );
   const rendererRef = useRef<vtkRenderer | null>(null);
   const renderWindowRef = useRef<vtkRenderWindow | null>(null);
@@ -47,7 +47,7 @@ export default function Viewer3D({
     if (!containerRef.current || !vtkImage) return;
 
     // Skip VTK initialization in Playwright tests (no WebGL in headless)
-    if ((globalThis as any).__PLAYWRIGHT_TEST__){
+    if ((globalThis as any).__PLAYWRIGHT_TEST__) {
       setIsReady(true);
       onReady?.();
       return;

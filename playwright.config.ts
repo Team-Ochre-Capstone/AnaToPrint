@@ -18,14 +18,14 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   timeout: 60000,
-  
+
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "http://localhost:5173",
 
     headless: process.env.CI ? true : true,
 
-    viewport: {width: 1280, height: 800},
+    viewport: { width: 1280, height: 800 },
 
     actionTimeout: 20000,
 
@@ -44,7 +44,7 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        browserName: "chromium", 
+        browserName: "chromium",
         headless: true,
       },
     },
@@ -61,7 +61,7 @@ export default defineConfig({
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
-        browserName: "webkit"
+        browserName: "webkit",
       },
     },
   ],
