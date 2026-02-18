@@ -41,4 +41,13 @@ test.describe("Navigation", () => {
       await expect(page).toHaveURL("/settings");
     }
   });
+
+  //Checking for content within pages
+  test('About page content visible', async ({ page }) => {
+    await page.goto('http://localhost:5173/about');
+    await expect(page.locator('text=AnaToPrint')).toBeVisible();
+    await expect(page.locator('text=Group Members')).toBeVisible();
+    await expect(page.locator('text=Client')).toBeVisible();
+  });
+
 });
