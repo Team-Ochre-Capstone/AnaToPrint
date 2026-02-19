@@ -10,7 +10,7 @@ Capstone project for BS in Computer Science, University of Maine
 
 ```bash
    git clone
-   cd Ochre-Capstone
+   cd AnaToPrint
 ```
 
 2. Install dependencies
