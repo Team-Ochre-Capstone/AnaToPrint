@@ -6,6 +6,13 @@ Capstone project for BS in Computer Science, University of Maine
 
 ## Quick Start
 
+Web-app is now hosted using Vercel
+To access the web-app with no install follow the below link:
+
+https://ana-to-print.vercel.app/
+
+## Manual Start and Codebase installation
+
 1. Clone the repository
 
 ```bash
